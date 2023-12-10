@@ -15,8 +15,7 @@ To run this project, you'll need:
 - To setup your own database: <code>python manage.py migrate</code>
 - If changes are made to the models: <code>python manage.py makemigrations auctions</code>
 
-### Start the development server: <code>**python manage.py runserver**<code/>
+## Start the development server: <code>**python manage.py runserver**<code/>
 
 
-## Usage:
-- Browse listings. Register an account to create listings, comment on listings, place bids, and add listings to your watchlist. 
+### Usage: Browse listings. Register an account to create listings, comment on listings, place bids, and add listings to your watchlist. 
