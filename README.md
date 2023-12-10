@@ -5,11 +5,13 @@ HTML/CSS/Django stack enables a dynamic database for product auctions (like ebay
 TODO
 
 ## Requirements
-
 To run this project, you'll need:
-
 - Python
 - Django framework. Install via pip: <code>pip install django</code>
+
+## Usage: 
+- Browse listings. Register an account to create listings, comment on listings, place bids, and add listings to your watchlist. 
+
 
 ## Setup Instructions
 - To setup your own database: <code>python manage.py migrate</code>
@@ -18,5 +20,4 @@ To run this project, you'll need:
 ## Start the development server: <code>**python manage.py runserver**<code/>
 
 
-## Usage: 
-- Browse listings. Register an account to create listings, comment on listings, place bids, and add listings to your watchlist. 
+
