@@ -1,5 +1,5 @@
 # Django.Ebay
-HTML/CSS/Django stack to enable a dynamic database and user authentication
+HTML/CSS/Django stack enables a dynamic database for product auctions (like ebay) and user authentication, enabling user specific HTML returns.
 
 ## Project Structure
 TODO
