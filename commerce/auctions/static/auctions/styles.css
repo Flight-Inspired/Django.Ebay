@@ -1,0 +1,139 @@
+body {
+    padding: 20px;
+}
+
+
+
+.create-listing-container {
+    align-items: center;
+}
+.create-listing-item {
+    width: 100%;
+    padding: 20px;
+    border: 1.5px solid #ccc;
+    box-sizing: border-box;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    border-radius: 5px;
+}
+.create-listing-item form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+}
+.create-listing-item form label,
+.create-listing-item form input,
+.create-listing-item form textarea {
+    width: 100%;
+}
+.form-row {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+
+}
+.form-column {
+    flex: 1;
+    width: 50%;
+}
+
+
+
+
+
+
+
+.listing-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+
+}
+.listing-item {
+    width: calc(33.33% - 20px);
+    padding: 20px;
+    border: 1.5px solid #ccc;
+    box-sizing: border-box;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+
+}
+.listing-image {
+    max-width: 100%;
+    max-height: 280px;
+    height: auto;
+}
+
+
+
+.listing-detail-container {
+    width: 85%;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1.5px solid #ccc;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+    height: auto;
+}
+.listing-detail-item {
+    display: flex;
+    align-items: center;
+}
+.listing-detail-image {
+
+    margin-right: 20px;
+    max-width: 500px; max-height: 380px; width: auto; height: auto;
+
+}
+.listing-detail-text {
+    flex: 1; /* Fill remaining space */
+}
+.listing-detail-buttons {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.listing-detail-buttons form {
+    margin-bottom: 0px;
+
+}
+
+.listing-detail-buttons button {
+    padding: 6px 12px;
+    margin-left: 15px;
+    cursor: pointer;
+    background-color: lightblue;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.listing-detail-buttons button:hover {
+    background-color: #2980b9;
+}
+
+
+
+.navbar {
+    background-color: white !important;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+.navbar-brand {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+.navbar-nav .nav-link {
+    color: #007bff !important; /* Default color */
+}
+/* Hover effect for links in navbar */
+.navbar-nav .nav-link:hover {
+    color: #0056b3 !important;
+}

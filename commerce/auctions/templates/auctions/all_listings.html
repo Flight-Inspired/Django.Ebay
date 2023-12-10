@@ -1,0 +1,68 @@
+{% extends "auctions/layout.html" %}
+
+{% block title %}All Listings{% endblock %}
+
+{% block body %}
+    <center>
+    <h3>Active Listings</h3>
+    </center>
+    {% if active_listings %}
+        <div class="listing-container">
+            {% for listing in active_listings %}
+                <div class="listing-item">
+                    <center>
+                        <h4><a href="{% url 'listing_detail' listing.pk %}">{{ listing.title }}</a></h4>
+                        <p>{{ listing.description|slice:":75" }}...</p> <!-- Display only the first 75 characters -->
+                        {% if listing.current_bid %}
+                            <p>Current Bid: ${{ listing.current_bid|floatformat:2 }}</p>
+                        {% else %}
+                            <p>Starting Bid: ${{ listing.starting_bid }}</p>
+                        {% endif %}
+                        {% if listing.image_url %}
+                            <img src="{{ listing.image_url }}" alt="{{ listing.title }}" class="listing-image">
+                        {% else %}
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg" alt="No Image Available" class="listing-image" style="width: auto; height: 260px;">
+                        {% endif %}
+                    </center>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No active listings available.</p>
+    {% endif %}
+
+    <hr>
+
+    <center>
+    <h3>Inactive Listings</h3>
+    </center>
+    {% if inactive_listings %}
+        <div class="listing-container">
+            {% for listing in inactive_listings %}
+                <div class="listing-item">
+                    <center>
+                        <h4><a href="{% url 'listing_detail' listing.pk %}">{{ listing.title }}</a></h4>
+                        <p>{{ listing.description|slice:":75" }}...</p> <!-- Display only the first 75 characters -->
+                        {% if listing.winning_bidder %}
+                            <p>Winning Bid: ${{ listing.winning_amount|floatformat:2 }}</p>
+                            {% if listing.winning_bidder == user %}
+                                <p>Congratulations! You've won this auction.</p>
+                            {% endif %}
+                        {% else %}
+                            <p>No bids placed</p>
+                        {% endif %}
+                        {% if listing.image_url %}
+                            <img src="{{ listing.image_url }}" alt="{{ listing.title }}" class="listing-image">
+                        {% else %}
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg" alt="No Image Available" class="listing-image" style="width: auto; height: 260px;">
+                        {% endif %}
+                    </center>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+    <center>
+        <p>No inactive listings available.</p>
+    </center>
+    {% endif %}
+{% endblock %}

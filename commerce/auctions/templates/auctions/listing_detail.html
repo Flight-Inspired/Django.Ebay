@@ -1,0 +1,100 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <center>
+        <h3>Listing Detail</h3>
+    </center>
+    <div class="listing-detail-container" style="position: relative;">
+        <div class="listing-detail-item">
+            <!-- Listing Image handle -->
+            {% if listing.image_url %}
+                <img src="{{ listing.image_url }}" alt="{{ listing.title }}" class="listing-detail-image" style="max-width: 430px">
+            {% else %}
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg" alt="No Image Available" class="listing-detail-image" style="width: auto; height: 380px;">
+            {% endif %}
+            <!-- Listing details -->
+            <div class="listing-detail-text">
+                <h3>{{ listing.title }}</h3>
+                <p>Description: {{ listing.description }}</p>
+                <p>Starting Bid: ${{ listing.starting_bid }}</p>
+                <!-- Bidding functionality when listing is active and user logged in -->
+                {% if listing.is_active and user.is_authenticated %}
+                    <p>Current Bid: ${{ current_bid|floatformat:2 }}</p>
+                    <form method="post" action="">
+                        {% csrf_token %}
+                        <input type="hidden" name="listing_id" value="{{ listing.id }}">
+                        <label for="bid_amount">Your Bid:</label>
+                        <input type="number" style="width: 20%;" id="bid_amount" name="bid_amount" min="{{ min_bid }}" step="0.01" required>
+                        <button type="submit">Place Bid</button>
+                    </form>
+                {% else %}
+                    <!-- Inactive Functionality -->
+                    {% if not listing.is_active %}
+                        {% if winning_bidder %}
+                            {% if winning_bidder == user %}
+                                <p>Congratulations! You've won this auction.</p>
+                                <p>The winning bid: ${{ winning_amount }}</p>
+                            {% else %}
+                                {% if winning_amount %}
+                                    <p>Winning bid: ${{ winning_amount }}</p>
+                                {% else %}
+                                    <p>No bids placed</p>
+                                {% endif %}
+                            {% endif %}
+                        {% else %}
+                            <p>No winning bidder for this listing</p>
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+            </div>
+            <!-- Watchlist and Close Auction buttons -->
+            <div class="listing-detail-buttons" style="position: absolute; bottom: 15px; display: flex; margin-right: 15px;">
+                {% if user.is_authenticated %}
+                    {% if user == listing.created_by %}
+                        {% if listing.is_active %}
+                            <form method="post" action="{% url 'close_auction' listing.id %}">
+                                {% csrf_token %}
+                                <button type="submit">Close Auction</button>
+                            </form>
+                        {% endif %}
+                    {% endif %}
+                    <!-- Display Watchlist button irrespective of the listing's active status -->
+                    <form method="post" action="{% url 'add_to_watchlist' listing.id %}">
+                        {% csrf_token %}
+                        <button type="submit" name="watchlist_action">
+                            {% if in_watchlist %}
+                                Remove from Watchlist
+                            {% else %}
+                                Add to Watchlist
+                            {% endif %}
+                        </button>
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <!-- Comment section (outside the listing container) -->
+    <div class="comment-section" style="margin-top: 10px; display: flex; flex-direction: column; align-items: center;">
+        <h4>Comments</h4>
+        {% if user.is_authenticated %}
+            <form method="post" action="{% url 'add_comment' listing.id %}">
+                {% csrf_token %}
+                <div class="listing-detail-buttons" style="position: relative;">
+                    <textarea name="comment_text" rows="2" cols="50" placeholder="Add a comment..." style="margin-bottom: 10px;"></textarea>
+                    <button type="submit" style="position: absolute;">Post Comment</button>
+                </div>
+            </form>
+        {% else %}
+            <p>Please <a href="{% url 'login' %}">login</a> to add comments.</p>
+        {% endif %}
+        {% if comments %}
+            <ul>
+                {% for comment in comments %}
+                    <li>{{ comment.comment_text }} - by {{ comment.commenter.username }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No comments yet.</p>
+        {% endif %}
+    </div>
+{% endblock %}

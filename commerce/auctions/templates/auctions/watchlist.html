@@ -1,0 +1,62 @@
+{% extends "auctions/layout.html" %}
+
+{% block title %}Watchlist{% endblock %}
+
+{% block body %}
+    <h5>Watchlist</h5>
+    {% if active_watchlist_items %}
+        <h3>Active Listings</h3>
+        <div class="listing-container">
+            {% for item in active_watchlist_items %}
+                <div class="listing-item">
+                    <center>
+                        <h4><a href="{% url 'listing_detail' item.listing.pk %}">{{ item.listing.title }}</a></h4>
+                        <p>{{ listing.description|slice:":75" }}</p> <!-- Display only the first 75 characters -->
+                        {% if item.listing.current_bid %}
+                            <p>Current Bid: ${{ item.listing.current_bid|floatformat:2 }}</p>
+                        {% else %}
+                            <p>Starting Bid: ${{ item.listing.starting_bid }}</p>
+                        {% endif %}
+                        {% if item.listing.image_url %}
+                            <img src="{{ item.listing.image_url }}" alt="{{ item.listing.title }}" class="listing-image">
+                        {% else %}
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg" alt="No Image Available" class="listing-image" style="width: auto; height: 260px;">
+                        {% endif %}
+                    </center>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% if inactive_watchlist_items %}
+        <h3>Inactive Listings</h3>
+        <div class="listing-container">
+            {% for item in inactive_watchlist_items %}
+                <div class="listing-item">
+                    <center>
+                        <h4><a href="{% url 'listing_detail' item.listing.pk %}">{{ item.listing.title }}</a></h4>
+                        <p>{{ listing.description|slice:":75" }}</p> <!-- Display only the first 75 characters -->
+                        {% if item.listing.current_bid %}
+                            <p>Winning Bid: ${{ item.listing.current_bid|floatformat:2 }}</p>
+                            <!-- Check if the user is the winning bidder -->
+                            {% if winning_bidder == request.user %}
+                                <p>Congratulations! You've won this auction.</p>
+                            {% endif %}
+                        {% else %}
+                            <p>No bids placed</p>
+                        {% endif %}
+                        {% if item.listing.image_url %}
+                            <img src="{{ item.listing.image_url }}" alt="{{ item.listing.title }}" class="listing-image">
+                        {% else %}
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg" alt="No Image Available" class="listing-image" style="width: auto; height: 260px;">
+                        {% endif %}
+                    </center>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% if not active_watchlist_items and not inactive_watchlist_items %}
+        <p>Your watchlist is empty.</p>
+    {% endif %}
+{% endblock %}
