@@ -18,6 +18,3 @@ To run this project, you'll need:
 - If changes are made to the models: <code>python manage.py makemigrations auctions</code>
 
 ## Start the development server: <code>**python manage.py runserver**<code/>
-
-
-
