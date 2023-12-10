@@ -9,10 +9,10 @@ TODO
 To run this project, you'll need:
 
 - Python
-- Django framework. Install via pip: 'pip install django'
+- Django framework. Install via pip: pip install django'
 
 ## Setup Instructions
-- To setup your own database: 'python manage.py migrate'
+- To setup your own database: <code>python manage.py migrate</code>
 - If changes are made to the models: 'python manage.py makemigrations auctions'
 
 ### Start the development server: '**python manage.py runserverz88'
