@@ -18,4 +18,4 @@ To run this project, you'll need:
 ## Start the development server: <code>**python manage.py runserver**<code/>
 
 
-### Usage: Browse listings. Register an account to create listings, comment on listings, place bids, and add listings to your watchlist. 
+Usage: Browse listings. Register an account to create listings, comment on listings, place bids, and add listings to your watchlist. 
